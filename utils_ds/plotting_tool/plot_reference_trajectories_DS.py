@@ -30,9 +30,9 @@ def plot_reference_trajectories_DS(Data, att, vel_sample, vel_size):
         ax.scatter(att[0], att[1], att[2], s=200, c='blue', alpha=0.5)
         ax.axis('auto')
         ax.set_title('Reference Trajectory')
-        ax.set_xlabel(r'$\xi_1$')
-        ax.set_ylabel(r'$\xi_2$')
-        ax.set_zlabel(r'$\xi_3$')
+        ax.set_xlabel(r'$\xi_1(m)$')
+        ax.set_ylabel(r'$\xi_2(m)$')
+        ax.set_zlabel(r'$\xi_3(m)$')
         vel_points = Data[:, ::vel_sample]
         U = np.zeros(len(vel_points[0]))
         V = np.zeros(len(vel_points[0]))

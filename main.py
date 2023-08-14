@@ -53,6 +53,7 @@ class DsOpt:
         self.js_path = js_path
         self.original_js = read_json(js_path)
         self.K, self.M, self.Priors, self.Mu, self.Sigma = extract_param(self.original_js)
+        print('read Mu is: ', self.Mu)
         self.ds_struct = rearrange_clusters(self.Priors, self.Mu, self.Sigma, self.att)
         # learned ds parameters
         self.A_k = np.zeros((self.K, self.M, self.M))
@@ -62,13 +63,34 @@ class DsOpt:
     def begin(self):
         P_opt = optimize_P(self.Data_sh)
         A_k, b_k = optimize_lpv_ds_from_data(self.Data, self.att, 2, self.ds_struct, P_opt, 0)
+        
         # document the learned ds
         self.A_k = A_k
         self.b_k = b_k
         self.P_opt = P_opt
-        self.original_js['A'] = A_k.flatten().tolist()
+
+        new_A_k = np.copy(self.A_k)
+        new_Sig = np.copy(self.Sigma)
+
+        for k in range(self.K):
+            new_A_k[k] = new_A_k[k].T
+            new_Sig[k] = new_Sig[k].T
+
+        print(A_k)
+        print(self.ds_struct.Sigma)
+        print('processed Mu is', self.ds_struct.Mu)
+        new_A_k = new_A_k.reshape(-1).tolist()
+        self.original_js['Sigma'] = new_Sig.reshape(-1).tolist()
+        self.original_js['Mu'] = self.ds_struct.Mu.T.reshape(-1).tolist()
+        self.original_js['Prior'] = self.ds_struct.Priors.tolist()
+        self.original_js['A'] = new_A_k
         self.original_js['attractor']= self.att.ravel().tolist()
+        self.original_js['att_all']= self.att.ravel().tolist()
         self.original_js["dt"] = self.dt
+        self.original_js["gripper_open"] = 0
+
+        # x
+
         # (Data, A_k, b_k, traj_length, x0_all, ds_struct)
         write_json(self.original_js, self.js_path)
 

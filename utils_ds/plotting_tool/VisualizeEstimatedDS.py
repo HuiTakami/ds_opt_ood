@@ -3,7 +3,14 @@ from utils_ds.structures import Opt_Sim
 from utils_ds.Simulation import Simulation
 import matplotlib.pyplot as plt
 from utils_ds.plotting_tool.sample_initial_points import sample_initial_points
+import matplotlib as mpl
 
+font = {'family' : 'Times New Roman',
+         'size'   : 16
+        #  'serif':  'cmr10'
+         }
+mpl.rc('font', **font)
+mpl.rc('text', usetex = True)
 
 def VisualizeEstimatedDS(Xi_ref, ds_lpv, ds_plot_options):
     dim = Xi_ref.shape[0]
@@ -50,9 +57,9 @@ def VisualizeEstimatedDS(Xi_ref, ds_lpv, ds_plot_options):
                 ax1.plot3D(cur_traj[0], cur_traj[1], cur_traj[2], 'blue')
         legend = ax1.legend(loc="best")
         legend.set_draggable(True)
-        ax1.set_xlabel(r'$\xi_1$')
-        ax1.set_ylabel(r'$\xi_2$')
-        ax1.set_zlabel(r'$\xi_3$')
+        ax1.set_xlabel(r'$\xi_1(m)$')
+        ax1.set_ylabel(r'$\xi_2(m)$')
+        ax1.set_zlabel(r'$\xi_3(m)$')
         plt.show()
     elif dim == 2:
         num_of_traj = x0_all.shape[1]
