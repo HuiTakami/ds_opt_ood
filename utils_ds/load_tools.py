@@ -39,7 +39,7 @@ def load_dataset_DS(pkg_dir, dataset, sub_sample, nb_trajectories):
     if not sub_sample:
         sub_sample = 2
 
-    final_dir = os.path.join(pkg_dir, dataset_name)
+    final_dir = os.path.join(pkg_dir,  'data', dataset_name)
 
 
     if dataset == 1:

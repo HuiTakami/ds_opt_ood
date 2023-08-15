@@ -72,16 +72,15 @@ class DsOpt:
         new_A_k = np.copy(self.A_k)
         new_Sig = np.copy(self.Sigma)
 
+        # convert in-order to the ros data recovery
         for k in range(self.K):
             new_A_k[k] = new_A_k[k].T
             new_Sig[k] = new_Sig[k].T
+        Mu_trans = self.ds_struct.Mu.T
 
-        print(A_k)
-        print(self.ds_struct.Sigma)
-        print('processed Mu is', self.ds_struct.Mu)
         new_A_k = new_A_k.reshape(-1).tolist()
         self.original_js['Sigma'] = new_Sig.reshape(-1).tolist()
-        self.original_js['Mu'] = self.ds_struct.Mu.T.reshape(-1).tolist()
+        self.original_js['Mu'] = Mu_trans.reshape(-1).tolist()
         self.original_js['Prior'] = self.ds_struct.Priors.tolist()
         self.original_js['A'] = new_A_k
         self.original_js['attractor']= self.att.ravel().tolist()
@@ -97,6 +96,9 @@ class DsOpt:
     def evaluate(self):
         rmse, e_dot, dwtd = reproduction_metrics(self.Data, self.A_k, self.b_k,
                                                  self.traj_length, self.x0_all, self.ds_struct)
+        print("the reproduced RMSE is ", rmse)
+        print("the reproduced e_dot is", e_dot)
+        print("the reproduced dwtd is ", dwtd)
 
     def make_plot(self):
         Data_dim = self.M
@@ -113,8 +115,8 @@ class DsOpt:
 
 
 if __name__ == '__main__':
-    pkg_dir = os.getcwd()
-    chosen_dataset = 7  # 6 # 4 (when conducting 2D test)
+    pkg_dir = os.path.join(os.getcwd(), 'data')
+    chosen_dataset = 4  # 6 # 4 (when conducting 2D test)
     sub_sample = 2  # '>2' for real 3D Datasets, '1' for 2D toy datasets
     nb_trajectories = 4  # Only for real 3D data
     Data, Data_sh, att, x0_all, _, dt, traj_length = load_tools.load_dataset_DS(pkg_dir, chosen_dataset, sub_sample,
@@ -127,7 +129,8 @@ if __name__ == '__main__':
         "dt": dt,
         "traj_length":traj_length
     }
-    ds_opt = DsOpt(data, os.path.join(pkg_dir, "learned_cluster", "sink_shape", "output_sink_1.json"))
+
+    ds_opt = DsOpt(data, os.path.join(pkg_dir, "output.json"))
     ds_opt.begin()
     ds_opt.evaluate()
     ds_opt.make_plot()
