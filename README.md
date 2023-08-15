@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LPV-DS OOD Style for DAMM Pipeline
 
 This module is an enhanced rendition of the optimization section from:
@@ -59,3 +60,6 @@ Plot: Make plots for Lyapunov derivative, value, and reproduced stream lines
 ```
 ds_opt.evaluate()
 ```
+=======
+# ds_opt_ood
+>>>>>>> origin/main
