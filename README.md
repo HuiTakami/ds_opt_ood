@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # LPV-DS OOD Style for DAMM Pipeline
 
 This module is an enhanced rendition of the optimization section from:
@@ -56,10 +55,12 @@ Return the rmse, e_dot, dwtd for learned trajectory
 ds_opt.evaluate()
 ```
 
-Plot: Make plots for Lyapunov derivative, value, and reproduced stream lines
+Plot: Make plots for Lyapunov derivative, value, and reproduced streamlines
 ```
 ds_opt.evaluate()
 ```
-=======
-# ds_opt_ood
->>>>>>> origin/main
+![21901692136831_ pic](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/c08f82e0-7837-4e43-a94f-072723a95f2c)
+![21911692136852_ pic](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/df892461-d154-4ca9-a2a2-5e8134606071)
+
+![21921692136877_ pic_hd](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/f2c9839b-8aa0-40ab-b142-648d9321c4be)
+
