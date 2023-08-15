@@ -10,8 +10,10 @@ Building upon the output from:
 https://github.com/SunannnSun/damm,
 this module learns a quadratic Lyapunov function. Subsequently, it undertakes regression within the bounds of the Lyapunov function to ensure both precision and stability.
 
+This module will output a .json file that ROS dynamical system executor could execute in Lab.
+
 ---
-### Plug in
+### Input
 To utilize it on your algorithm:
 
 The data should be formulated as a dictionary:
@@ -59,8 +61,5 @@ Plot: Make plots for Lyapunov derivative, value, and reproduced streamlines
 ```
 ds_opt.evaluate()
 ```
-![21901692136831_ pic](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/c08f82e0-7837-4e43-a94f-072723a95f2c)
-![21911692136852_ pic](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/df892461-d154-4ca9-a2a2-5e8134606071)
-
-![21921692136877_ pic_hd](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/f2c9839b-8aa0-40ab-b142-648d9321c4be)
+![21931692138054_ pic](https://github.com/HuiTakami/ds_opt_ood/assets/97799818/7207f6f9-a93c-494d-84a3-bb691609160e)
 
